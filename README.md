@@ -21,3 +21,5 @@ unsigned moves_left() const;
 /// Returns a textual representation of the current game state 
 std::string to_string() const;
 ```
+
+Please note that x describes the column and y the row when looking at the printed version.

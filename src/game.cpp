@@ -55,12 +55,15 @@ TicTacToe::result TicTacToe::set_piece(unsigned const x, unsigned const y) {
     move_count += 1;
 
     if (is_win(current_board)) {
-        return last_state =
-                (white_turn ? result::END_WHITE_WIN : result::END_BLACK_WIN);
+        last_state = white_turn ? result::END_WHITE_WIN : result::END_BLACK_WIN;
+        goto end_change_player;
     }
 
-    return last_state =
-            (moves_left() > 0 ? result::ONGOING : result::END_DRAW);
+    last_state = moves_left() ? result::ONGOING : result::END_DRAW;
+    end_change_player:
+    white_turn = not white_turn;
+
+    return last_state;
 }
 
 std::string TicTacToe::to_string() const {
