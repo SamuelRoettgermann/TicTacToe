@@ -1,21 +1,25 @@
+#pragma once
+
 #include <string>
 #include <cstdint>
 #include <iostream>
-#include <unordered_map>
 
 using std::uint16_t;
 
 class TicTacToe {
-    static const char WHITE_SYMBOL = 'O', BLACK_SYMBOL = 'X', EMPTY_SYMBOL = ' ';
+    static constexpr char WHITE_SYMBOL = 'O', BLACK_SYMBOL = 'X', EMPTY_SYMBOL = ' ';
+
+public:
     enum class result {
-        ONGOING,    
+        ONGOING,
         END_DRAW,
         END_BLACK_WIN,
         END_WHITE_WIN,
         INVALID_MOVE
     };
 
-    static const std::string result_to_str(const result res) {
+private:
+    static std::string result_to_str(const result res) {
         switch (res) {
             case result::ONGOING:
                 return "Ongoing";
@@ -32,7 +36,7 @@ class TicTacToe {
         }
     }
 
-    friend std::ostream& operator<<(std::ostream& o, const result res) {
+    friend std::ostream &operator<<(std::ostream &o, const result res) {
         o << result_to_str(res);
         return o;
     }
@@ -42,27 +46,38 @@ class TicTacToe {
     bool white_turn;
     result last_state;
 
-    public:
-    TicTacToe() : white_board{0}, black_board{0}, move_count{0}, white_turn{true}, last_state{result::ONGOING} {}
+public:
+    TicTacToe() : white_board{0}, black_board{0}, move_count{0}, white_turn{true}, last_state{result::ONGOING} {
+    }
 
     /// Places a piece at the x, y coordinates and returns a result instance, indicating the current status
-    result set_piece(unsigned const x, unsigned const y);
-    
+    result set_piece(unsigned x, unsigned y);
+
     /// Returns true iff white is to move
-    bool is_white_turn() const;
-    
+    [[nodiscard]] bool is_white_turn() const;
+
     /// Returns true iff black is to move
-    bool is_black_turn() const;
+    [[nodiscard]] bool is_black_turn() const;
 
     /// Returns a number describing how many moves have been played so far
-    unsigned moves_played() const;
+    [[nodiscard]] unsigned moves_played() const;
 
     /// Returns a number describing how many moves still need to be played
-    unsigned moves_left() const;
-    
+    [[nodiscard]] unsigned moves_left() const;
+
+    /// Returns whether the game is over 
+    [[nodiscard]] bool game_over() const;
+
     /// Returns a textual representation of the current game state 
-    std::string to_string() const;
+    [[nodiscard]] std::string to_string() const;
+
+    struct gamestate {
+        uint16_t bitboard_white, bitboard_black;
+    };
+
+    /// Returns the current gamestate. Useful for automation. 
+    [[nodiscard]] gamestate state() const;
 
     /// Overload to print the current gamestate
-    friend std::ostream& operator<<(std::ostream& o, const TicTacToe& game);
+    friend std::ostream &operator<<(std::ostream &o, const TicTacToe &game);
 };

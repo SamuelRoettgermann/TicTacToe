@@ -1,16 +1,12 @@
 #include <iostream>
-#include <string>
+#include <cstdint>
 
-#include "game.hpp"
+#include "simulation.hpp"
+#include "strategies.hpp"
 
+namespace strat = sim::strategies;
 
 int main() {
-    // Very brief example of how it can be used
-    TicTacToe game;
-    game.set_piece(0, 1);
-    game.set_piece(1, 1);
-    game.set_piece(0, 0);
-    game.set_piece(2, 1);
-    game.set_piece(0, 2);
-    std::cout << game;
+    strat::RandomStrategy s1{}, s2{};
+    std::cout << sim::simulate_game(s1, s2) << "\n";
 }

@@ -22,7 +22,7 @@ endif()
 set(CMAKE_EXPORT_COMPILE_COMMANDS ON)
 
 # display many warnings during compilation
-add_compile_options(-Wall -Wextra -Wconversion -pedantic -Wfatal-errors)
+add_compile_options(-Wall -Wextra -Wconversion -pedantic -Wfatal-errors -Wno-overloaded-virtual)
 
 add_compile_options(-march=native)
 
