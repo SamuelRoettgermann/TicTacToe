@@ -4,7 +4,7 @@
 #include <utility>
 #include <format>
 
-#include "game/game.hpp"
+#include "games/TicTacToe/game.hpp"
 #include "simulation.hpp"
 
 using std::uint16_t;
@@ -65,6 +65,7 @@ namespace sim {
 
 
             first_strat = true;
+
         try_strat2:
             const auto [board_white, board_black] = game.state();
             auto pieces = bits_to_pieces(board_white, board_black);

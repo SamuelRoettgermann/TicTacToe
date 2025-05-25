@@ -18,33 +18,9 @@ public:
         INVALID_MOVE
     };
 
-private:
-    static std::string result_to_str(const result res) {
-        switch (res) {
-            case result::ONGOING:
-                return "Ongoing";
-            case result::END_DRAW:
-                return "Draw";
-            case result::END_BLACK_WIN:
-                return "Black Wins";
-            case result::END_WHITE_WIN:
-                return "White Wins";
-            case result::INVALID_MOVE:
-                return "Illegal move";
-            default:
-                return "Invalid state";
-        }
-    }
-
-    friend std::ostream &operator<<(std::ostream &o, const result res) {
-        o << result_to_str(res);
-        return o;
-    }
-
-    uint16_t white_board, black_board;
-    unsigned move_count;
-    bool white_turn;
-    result last_state;
+    struct gamestate {
+        uint16_t bitboard_white, bitboard_black;
+    };
 
 public:
     TicTacToe() : white_board{0}, black_board{0}, move_count{0}, white_turn{true}, last_state{result::ONGOING} {
@@ -71,13 +47,41 @@ public:
     /// Returns a textual representation of the current game state 
     [[nodiscard]] std::string to_string() const;
 
-    struct gamestate {
-        uint16_t bitboard_white, bitboard_black;
-    };
-
     /// Returns the current gamestate. Useful for automation. 
     [[nodiscard]] gamestate state() const;
 
     /// Overload to print the current gamestate
-    friend std::ostream &operator<<(std::ostream &o, const TicTacToe &game);
+    friend std::ostream &operator<<(std::ostream &o, const TicTacToe &game) {
+        o << game.to_string();
+        return o;
+    }
+
+private:
+    static std::string result_to_str(const result res) {
+        switch (res) {
+            case result::ONGOING:
+                return "Ongoing";
+            case result::END_DRAW:
+                return "Draw";
+            case result::END_BLACK_WIN:
+                return "Black Wins";
+            case result::END_WHITE_WIN:
+                return "White Wins";
+            case result::INVALID_MOVE:
+                return "Illegal move";
+            default:
+                return "Invalid state";
+        }
+    }
+
+    friend std::ostream &operator<<(std::ostream &o, const result res) {
+        o << result_to_str(res);
+        return o;
+    }
+
+private:
+    uint16_t white_board, black_board;
+    unsigned move_count;
+    bool white_turn;
+    result last_state;
 };

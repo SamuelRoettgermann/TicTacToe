@@ -101,11 +101,6 @@ std::string TicTacToe::to_string() const {
     );
 }
 
-std::ostream &operator<<(std::ostream &o, const TicTacToe &game) {
-    o << game.to_string();
-    return o;
-}
-
 TicTacToe::gamestate TicTacToe::state() const {
     return {white_board, black_board};
 }
