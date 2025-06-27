@@ -1,36 +1,4 @@
-Old README:
-
-Simple implementation of TicTacToe using a bitboard per player to store the pieces
-
-API is as follows:
-
-```
-/// Places a piece at the x, y coordinates and returns a result instance, indicating the current status
-result set_piece(unsigned const x, unsigned const y);
-
-/// Returns true iff white is to move
-bool is_white_turn() const;
-
-/// Returns true iff black is to move
-bool is_black_turn() const;
-
-/// Returns a number describing how many moves have been played so far
-unsigned moves_played() const;
-
-/// Returns a number describing how many moves still need to be played
-unsigned moves_left() const;
-
-/// Returns a textual representation of the current game state 
-std::string to_string() const;
-```
-
-Please note that x describes the column and y the row when looking at the printed version.
-
-///////////////////////////////////////////////////////////////////////////////////////////
-
-New README:
-
-This project used to be just a TicTacToe game, but the idea shifted to a simulation software for TicTacToe.
+This project used to be just a TicTacToe game, but the idea shifted to a simulation software for games in general.
 
 The idea would be to eventually extend the program to support multiple games, or even that one can add their own games and Strategy signatures, but that would require an enormous re-write, and right now I want to keep the focus on the simulation part, and try to think of some "cool" analysis ideas.
 
